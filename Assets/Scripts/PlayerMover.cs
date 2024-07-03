@@ -13,12 +13,12 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private bool _isGrounded;
 
-    void Start()
+    private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         Move();
         Jump();

@@ -16,9 +16,9 @@ public class SpawnerCoin : MonoBehaviour
     {
         _pool = new ObjectPool<Coin>(
             createFunc: () => InstantiateAndSetup(),
-            actionOnGet: (obj) => ActionOnGet(obj),
-            actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-            actionOnDestroy: (obj) => Destroy(obj),
+            actionOnGet: (coin) => ActionOnGet(coin),
+            actionOnRelease: (coin) => coin.gameObject.SetActive(false),
+            actionOnDestroy: (coin) => Destroy(coin),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
@@ -30,13 +30,12 @@ public class SpawnerCoin : MonoBehaviour
         return coin;
     }
 
-    private void ActionOnGet(Coin obj)
+    private void ActionOnGet(Coin coin)
     {
         int randomIndex = Random.Range(0, _spawnPoints.Count);
         SpawnPointCoin spawnPoint = _spawnPoints[randomIndex];
-
-        obj.SetPosition(spawnPoint.transform.position); 
-        obj.gameObject.SetActive(true);
+        coin.SetPosition(spawnPoint.transform.position); 
+        coin.gameObject.SetActive(true);
     }
 
     private void Start()
