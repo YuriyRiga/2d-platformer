@@ -6,13 +6,12 @@ public class PlayerMover : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
     
-    public readonly int Speed = Animator.StringToHash(nameof(Speed));
-
     [SerializeField] private float _speedDirection;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Animator _animator;
     [SerializeField] private Coin _сoin;
 
+    private readonly int Speed = Animator.StringToHash(nameof(Speed));
     private Rigidbody2D _rigidbody;
     private float _direction;
     private bool _isJump = false;
