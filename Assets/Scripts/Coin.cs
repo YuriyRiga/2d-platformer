@@ -11,14 +11,9 @@ public class Coin : MonoBehaviour
     private Vector2 _startPosition;
     private ObjectPool<Coin> _objectPool;
 
-    public void SetPool(ObjectPool<Coin> objectPool)
+    private void Update()
     {
-        _objectPool = objectPool;
-    }
-
-    public void SetPosition( Vector2 position)
-    {
-        _startPosition = position;
+        transform.position = _startPosition + Vector2.up * Mathf.Sin(Time.time * _frequency) * _amplitude;
     }
 
     private void OnEnable()
@@ -31,9 +26,14 @@ public class Coin : MonoBehaviour
         StopCoroutine(ReturnToPoolAfterTime());
     }
 
-    private void Update()
+    public void SetPool(ObjectPool<Coin> objectPool)
     {
-        transform.position = _startPosition + Vector2.up * Mathf.Sin(Time.time * _frequency) * _amplitude;
+        _objectPool = objectPool;
+    }
+
+    public void SetPosition( Vector2 position)
+    {
+        _startPosition = position;
     }
 
     private IEnumerator ReturnToPoolAfterTime()
