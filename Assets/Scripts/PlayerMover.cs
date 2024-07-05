@@ -8,7 +8,7 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _speedDirection;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Coin _ñoin;
+    [SerializeField] private Coin _Ã±oin;
 
     private Rigidbody2D _rigidbody;
     private bool _isGrounded;
@@ -26,16 +26,17 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        float direction = Input.GetAxis(Horizontal);
-        _rigidbody.velocity = new Vector2(direction * _speedDirection, _rigidbody.velocity.y);
+        Vector3 scale = transform.localScale;
 
+        _rigidbody.velocity = new Vector2(direction * _speedDirection, _rigidbody.velocity.y);
+        
         if (direction > 0)
         {
-            transform.localScale = new Vector2(1, 1);
+            scale.x = Mathf.Abs(scale.x);
         }
         else if (direction < 0)
         {
-            transform.localScale = new Vector2(-1, 1);
+            scale.x = -Mathf.Abs(scale.x);
         }
 
         _animator.SetFloat("Speed", Mathf.Abs(direction));
