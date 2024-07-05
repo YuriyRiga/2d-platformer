@@ -31,11 +31,11 @@ public class EnemyMover : MonoBehaviour
     {
         if (_waypoints[_currentWaypoint].position.x > transform.position.x)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            scale.x = Mathf.Abs(scale.x);
         }
         else if (_waypoints[_currentWaypoint].position.x < transform.position.x)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            scale.x = -Mathf.Abs(scale.x); 
         }
     }
 }
