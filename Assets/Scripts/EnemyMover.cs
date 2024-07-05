@@ -16,14 +16,16 @@ public class EnemyMover : MonoBehaviour
     }
 
     private void MoveTowardsNextWaypoint()
-    {
-        if (Vector2.Distance(transform.position, _waypoints[_currentWaypoint].position) < _epsilon)
-        {
-            _currentWaypoint = (_currentWaypoint + 1) % _waypoints.Length;
-        }
+{
+    float sqrDistanceToWaypoint = (transform.position - _waypoints[_currentWaypoint].position).sqrMagnitude;
 
-        transform.position = Vector2.MoveTowards(transform.position, _waypoints[_currentWaypoint].position, _speed * Time.deltaTime);
+    if (sqrDistanceToWaypoint < _epsilon)
+    {
+        _currentWaypoint = (_currentWaypoint + 1) % _waypoints.Length;
     }
+
+    transform.position = Vector2.MoveTowards(transform.position, _waypoints[_currentWaypoint].position, _speed * Time.deltaTime);
+}
 
     private void FlipSprite()
     {
