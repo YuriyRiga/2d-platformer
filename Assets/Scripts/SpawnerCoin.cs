@@ -24,6 +24,10 @@ public class SpawnerCoin : MonoBehaviour
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
     }
+    private void Start()
+    {
+        StartCoroutine(SpawnCouldown());
+    }
 
     private Coin InstantiateAndSetup()
     {
@@ -38,11 +42,6 @@ public class SpawnerCoin : MonoBehaviour
         SpawnPointCoin spawnPoint = _spawnPoints[randomIndex];
         coin.SetPosition(spawnPoint.transform.position);
         coin.gameObject.SetActive(true);
-    }
-
-    private void Start()
-    {
-        StartCoroutine(SpawnCouldown());
     }
 
     private void GetCoin()
