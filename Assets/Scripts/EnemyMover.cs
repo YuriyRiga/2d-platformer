@@ -21,7 +21,7 @@ public class EnemyMover : MonoBehaviour
 
     if (sqrDistanceToWaypoint < _epsilon)
     {
-        _currentWaypoint = (_currentWaypoint + 1) % _waypoints.Length;
+        _currentWaypoint = ++_currentWaypoint % _waypoints.Length;
     }
 
     transform.position = Vector2.MoveTowards(transform.position, _waypoints[_currentWaypoint].position, _speed * Time.deltaTime);
