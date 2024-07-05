@@ -2,7 +2,7 @@
 
 public class EnemyMover : MonoBehaviour
 {
-    private const float _epsilon = 0.1f;
+    private const float Epsilon = 0.1f;
 
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed;
