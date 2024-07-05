@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -27,6 +28,7 @@ public class SpawnerCoin : MonoBehaviour
     private Coin InstantiateAndSetup()
     {
         Coin coin = Instantiate(_prefab);
+        coin.SetPool(_pool);
         return coin;
     }
 
@@ -34,18 +36,27 @@ public class SpawnerCoin : MonoBehaviour
     {
         int randomIndex = Random.Range(0, _spawnPoints.Count);
         SpawnPointCoin spawnPoint = _spawnPoints[randomIndex];
-        coin.SetPosition(spawnPoint.transform.position); 
+        coin.SetPosition(spawnPoint.transform.position);
         coin.gameObject.SetActive(true);
     }
 
     private void Start()
     {
-        InvokeRepeating(nameof(GetCoin), 0.0f, _repeatRate);
+        StartCoroutine(SpawnCouldown());
     }
 
     private void GetCoin()
     {
         _pool.Get();
+    }
+
+    private IEnumerator SpawnCouldown()
+    {
+        while (gameObject.activeSelf)
+        {
+            GetCoin();
+            yield return new WaitForSeconds(_repeatRate);
+        }
     }
 }
 
