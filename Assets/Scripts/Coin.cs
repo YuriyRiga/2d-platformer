@@ -7,7 +7,6 @@ public class Coin : MonoBehaviour
 
     private Vector2 _startPosition;
 
-    
     public void SetPosition( Vector2 position)
     {
         _startPosition = position;
