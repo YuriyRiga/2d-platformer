@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class Coin : MonoBehaviour
 {
-    [SerializeField] private float _amplitude = 0.2f; 
+    [SerializeField] private float _amplitude = 0.2f;
     [SerializeField] private float _frequency = 1f;
     [SerializeField] private float _timeLife = 5f;
 
@@ -21,17 +21,12 @@ public class Coin : MonoBehaviour
         StartCoroutine(ReturnToPoolAfterTime());
     }
 
-    private void OnDisable()
-    {
-        StopCoroutine(ReturnToPoolAfterTime());
-    }
-
     public void SetPool(ObjectPool<Coin> objectPool)
     {
         _objectPool = objectPool;
     }
 
-    public void SetPosition( Vector2 position)
+    public void SetPosition(Vector2 position)
     {
         _startPosition = position;
     }
@@ -48,7 +43,7 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.TryGetComponent<Player>(out Player _))
+        if (collision.gameObject.TryGetComponent<Player>(out Player _))
         {
             _objectPool.Release(this);
         }
