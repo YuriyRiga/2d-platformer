@@ -39,5 +39,7 @@ public class EnemyMover : MonoBehaviour
         {
             scale.x = -Mathf.Abs(scale.x);
         }
+
+        transform.localScale = scale;
     }
 }
