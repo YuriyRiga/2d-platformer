@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
-    
+
     [SerializeField] private float _speedDirection;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Animator _animator;
