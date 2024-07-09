@@ -70,7 +70,7 @@ public class PlayerMover : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Ground>(out Ground _))
+        if (collision.gameObject.TryGetComponent<Ground>(out _))
         {
             _isGrounded = true;
         }
@@ -78,9 +78,17 @@ public class PlayerMover : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Ground>(out Ground _))
+        if (collision.gameObject.TryGetComponent<Ground>(out _))
         {
             _isGrounded = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Coin coin))
+        {
+            coin.Deactivate();
         }
     }
 }
