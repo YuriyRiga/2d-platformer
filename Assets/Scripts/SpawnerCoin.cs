@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
+using System;
 
 public class SpawnerCoin : MonoBehaviour
 {
@@ -17,31 +18,48 @@ public class SpawnerCoin : MonoBehaviour
     {
         _pool = new ObjectPool<Coin>(
             createFunc: () => InstantiateAndSetup(),
-            actionOnGet: (coin) => ActionOnGet(coin),
-            actionOnRelease: (coin) => coin.gameObject.SetActive(false),
+            actionOnGet: (coin) => OnGetPool(coin),
+            actionOnRelease: (coin) => OnReleasePool(coin),
             actionOnDestroy: (coin) => Destroy(coin),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
+
     }
+
     private void Start()
     {
-        StartCoroutine(SpawnCouldown());
+        StartCoroutine(SpawnCooldown());
     }
 
     private Coin InstantiateAndSetup()
     {
         Coin coin = Instantiate(_prefab);
-        coin.SetPool(_pool);
+        coin.CoinDisable += Release;
         return coin;
     }
 
-    private void ActionOnGet(Coin coin)
+    private void OnGetPool(Coin coin)
     {
-        int randomIndex = Random.Range(0, _spawnPoints.Count);
+        int randomIndex = UnityEngine.Random.Range(0, _spawnPoints.Count);
         SpawnPointCoin spawnPoint = _spawnPoints[randomIndex];
-        coin.SetPosition(spawnPoint.transform.position);
+        coin.transform.position = spawnPoint.transform.position;
         coin.gameObject.SetActive(true);
+    }
+
+    private void OnReleasePool(Coin coin)
+    {
+        coin.gameObject.SetActive(false);
+    }
+
+    private void Release(Coin coin)
+    {
+        _pool.Release(coin);
+    }
+
+    private void Unsubscribe (Coin coin)
+    {
+        coin.CoinDisable -= OnReleasePool;
     }
 
     private void GetCoin()
@@ -49,7 +67,7 @@ public class SpawnerCoin : MonoBehaviour
         _pool.Get();
     }
 
-    private IEnumerator SpawnCouldown()
+    private IEnumerator SpawnCooldown()
     {
         while (gameObject.activeSelf)
         {
