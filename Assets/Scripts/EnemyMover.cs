@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
@@ -59,11 +59,11 @@ public class EnemyMover : MonoBehaviour
         {
             if (_playerTransform.position.x > transform.position.x)
             {
-                scale.x = Mathf.Abs(scale.x); 
+                scale.x = Mathf.Abs(scale.x);
             }
             else if (_playerTransform.position.x < transform.position.x)
             {
-                scale.x = -Mathf.Abs(scale.x); 
+                scale.x = -Mathf.Abs(scale.x);
             }
         }
         else
@@ -74,7 +74,7 @@ public class EnemyMover : MonoBehaviour
             }
             else if (_waypoints[_currentWaypoint].position.x < transform.position.x)
             {
-                scale.x = -Mathf.Abs(scale.x); 
+                scale.x = -Mathf.Abs(scale.x);
             }
         }
 
@@ -83,7 +83,7 @@ public class EnemyMover : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        if (collision.gameObject.TryGetComponent<Player>(out _))
         {
             _isChasingPlayer = true;
             _playerTransform = collision.transform;
@@ -92,7 +92,7 @@ public class EnemyMover : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player _))
+        if (collision.gameObject.TryGetComponent<Player>(out  _))
         {
             _isChasingPlayer = false;
             _playerTransform = null;

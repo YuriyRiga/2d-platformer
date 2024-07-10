@@ -4,12 +4,13 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
-    
+
     [SerializeField] private float _speedDirection;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Animator _animator;
-    [SerializeField] private Coin _Òoin;
+    [SerializeField] private Coin _—Åoin;
 
+    private readonly int Speed = Animator.StringToHash(nameof(Speed));
     private Rigidbody2D _rigidbody;
     private float _direction;
     private bool _isJump = false;
@@ -61,6 +62,7 @@ public class PlayerMover : MonoBehaviour
         transform.localScale = _scale;
 
         _animator.SetFloat(PlayerAnimatorData.Params.Speed, Mathf.Abs(_direction));
+
     }
 
     private void Jump()
@@ -81,6 +83,14 @@ public class PlayerMover : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Ground>(out _))
         {
             _isGrounded = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Coin coin))
+        {
+            coin.Deactivate();
         }
     }
 }
