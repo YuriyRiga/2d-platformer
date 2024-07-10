@@ -85,12 +85,4 @@ public class PlayerMover : MonoBehaviour
             _isGrounded = false;
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Coin coin))
-        {
-            coin.Deactivate();
-        }
-    }
 }

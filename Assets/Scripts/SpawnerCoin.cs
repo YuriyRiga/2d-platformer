@@ -57,7 +57,7 @@ public class SpawnerCoin : MonoBehaviour
 
     private void Unsubscribe(Coin coin)
     {
-        coin.CoinDisable -= OnReleasePool;
+        coin.CoinDisable -= Release;
         Destroy(coin.gameObject);
     }
 
