@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -16,36 +17,62 @@ public class SpawnerCoin : MonoBehaviour
     {
         _pool = new ObjectPool<Coin>(
             createFunc: () => InstantiateAndSetup(),
-            actionOnGet: (coin) => ActionOnGet(coin),
-            actionOnRelease: (coin) => coin.gameObject.SetActive(false),
-            actionOnDestroy: (coin) => Destroy(coin),
+            actionOnGet: (coin) => OnGetPool(coin),
+            actionOnRelease: (coin) => OnReleasePool(coin),
+            actionOnDestroy: (coin) => Unsubscribe(coin),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
     }
 
+    private void Start()
+    {
+        StartCoroutine(SpawnCouldown());
+    }
+
     private Coin InstantiateAndSetup()
     {
         Coin coin = Instantiate(_prefab);
+        coin.CoinDisable += Release;
         return coin;
     }
 
-    private void ActionOnGet(Coin coin)
+    private void OnGetPool(Coin coin)
     {
         int randomIndex = Random.Range(0, _spawnPoints.Count);
         SpawnPointCoin spawnPoint = _spawnPoints[randomIndex];
-        coin.SetPosition(spawnPoint.transform.position); 
+        coin.transform.position = spawnPoint.transform.position;
         coin.gameObject.SetActive(true);
     }
 
-    private void Start()
+    private void OnReleasePool(Coin coin)
     {
-        InvokeRepeating(nameof(GetCoin), 0.0f, _repeatRate);
+        coin.gameObject.SetActive(false);
+    }
+
+    private void Release(Coin coin)
+    {
+        _pool.Release(coin);
+    }
+
+    private void Unsubscribe(Coin coin)
+    {
+        coin.CoinDisable -= OnReleasePool;
+        Destroy(coin.gameObject);
     }
 
     private void GetCoin()
     {
         _pool.Get();
+    }
+
+    private IEnumerator SpawnCouldown()
+    {
+        while (gameObject.activeSelf)
+        {
+            GetCoin();
+            yield return new WaitForSeconds(_repeatRate);
+        }
     }
 }
 

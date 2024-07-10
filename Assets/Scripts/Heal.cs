@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 using System;
 
-public class Coin : MonoBehaviour
+public class Heal : MonoBehaviour
 {
+    [SerializeField] private float _value = 25f;
     [SerializeField] private float _timeLife = 5f;
 
-    private Vector2 _startPosition;
+    public event Action<Heal> HealDisable;
 
-    public event Action<Coin> CoinDisable;
+    public float Value => _value;
 
-    public void Deactivate()
+    public void Deactivate ()
     {
         gameObject.SetActive(false);
-        CoinDisable?.Invoke(this);
+        HealDisable?.Invoke(this);
     }
 
     private void OnEnable()

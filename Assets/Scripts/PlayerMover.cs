@@ -3,68 +3,82 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMover : MonoBehaviour
 {
-    private const string Horizontal = (nameof(Horizontal));
-
+    private const string Horizontal = nameof(Horizontal);
+    
     [SerializeField] private float _speedDirection;
     [SerializeField] private float _jumpForce;
     [SerializeField] private Animator _animator;
     [SerializeField] private Coin _ñoin;
 
     private Rigidbody2D _rigidbody;
-    private bool _isGrounded;
+    private float _direction;
+    private bool _isJump = false;
+    private bool _isGrounded = false;
+    private Vector3 _scale;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _scale = transform.localScale;
     }
 
     private void Update()
     {
+        _direction = Input.GetAxis(Horizontal);
+
+        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            _isJump = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
         Move();
-        Jump();
+
+        if (_isJump)
+        {
+            Jump();
+            _isJump = false;
+        }
     }
 
     private void Move()
     {
-        float direction = Input.GetAxis(Horizontal);
-        _rigidbody.velocity = new Vector2(direction * _speedDirection, _rigidbody.velocity.y);
+        Vector3 scale = transform.localScale;
 
-        if (direction > 0)
+        _rigidbody.velocity = new Vector2(_direction * _speedDirection, _rigidbody.velocity.y);
+
+        if (_direction > 0)
         {
-            transform.localScale = new Vector2(1, 1);
+            _scale.x = Mathf.Abs(_scale.x);
         }
-        else if (direction < 0)
+        else if (_direction < 0)
         {
-            transform.localScale = new Vector2(-1, 1);
+            _scale.x = -Mathf.Abs(_scale.x);
         }
 
-        _animator.SetFloat("Speed", Mathf.Abs(direction));
+        transform.localScale = _scale;
+
+        _animator.SetFloat(PlayerAnimatorData.Params.Speed, Mathf.Abs(_direction));
     }
 
     private void Jump()
     {
-        if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
-        }
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.gameObject.TryGetComponent<Ground>(out _))
         {
             _isGrounded = true;
-        }
-
-        if (collision.collider.CompareTag("Coin"))
-        {
-            collision.gameObject.SetActive(false);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Ground"))
+        if (collision.gameObject.TryGetComponent<Ground>(out _))
         {
             _isGrounded = false;
         }
