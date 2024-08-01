@@ -7,11 +7,6 @@ public class Enemy : MonoBehaviour
 
     public float Damage => _damage;
 
-    public void TakeDamage(float damage)
-    {
-        _health -= damage;
-    }
-
     private void Update()
     {
         Debug.Log("Враг" + _health);
@@ -21,5 +16,10 @@ public class Enemy : MonoBehaviour
             _health = 0;
             gameObject.SetActive(false);
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        _health -= damage;
     }
 }

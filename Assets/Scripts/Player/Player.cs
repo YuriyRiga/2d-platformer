@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
     public float Damage => _damage;
     public bool IsDead => _isDead;
 
+    private void Update()
+    {
+        Debug.Log(_health);
+    }
+
     public void TakeDamage(float damage)
     {
         _health -= damage;
@@ -33,12 +38,6 @@ public class Player : MonoBehaviour
             _health = _maxhealth;
         }
     }
-
-    private void Update()
-    {
-        Debug.Log(_health);
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

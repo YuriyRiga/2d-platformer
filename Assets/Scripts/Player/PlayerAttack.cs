@@ -23,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy _))
+        if (collision.gameObject.TryGetComponent<Enemy>(out _))
         {
             _enemyInRange = collision.GetComponent<Enemy>();
         }
@@ -31,7 +31,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Enemy>(out Enemy _))
+        if (collision.gameObject.TryGetComponent<Enemy>(out _))
         {
             _enemyInRange = null;
         }

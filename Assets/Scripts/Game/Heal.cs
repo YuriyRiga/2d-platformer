@@ -11,18 +11,18 @@ public class Heal : MonoBehaviour
 
     public float Value => _value;
 
+    private void OnEnable()
+    {
+        StartCoroutine(DeleteAfterTime());
+    }
+
     public void Deactivate ()
     {
         gameObject.SetActive(false);
         HealDisable?.Invoke(this);
     }
 
-    private void OnEnable()
-    {
-        StartCoroutine(ReturnToPoolAfterTime());
-    }
-
-    private IEnumerator ReturnToPoolAfterTime()
+    private IEnumerator DeleteAfterTime()
     {
         yield return new WaitForSeconds(_timeLife);
         Deactivate();
