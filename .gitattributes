@@ -1,2 +1,101 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Custom for Unity
+*.cs     diff=csharp
+*.cginc  text
+*.shader text
+*.compute text
+*.hlsl text
+*.glsl text
+
+# Image files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.tga binary
+*.gif binary
+*.psd binary
+*.tiff binary
+*.tif binary
+*.bmp binary
+*.iff binary
+*.pict binary
+
+# Audio files
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.aif binary
+*.aiff binary
+*.mod binary
+*.it binary
+*.s3m binary
+*.xm binary
+
+# Video files
+*.mov binary
+*.mpg binary
+*.mpeg binary
+*.mp4 binary
+*.avi binary
+*.asf binary
+*.ogv binary
+*.vp8 binary
+*.webm binary
+*.mkv binary
+*.vob binary
+
+# 3D models
+*.fbx binary
+*.ma text
+*.mb binary
+*.max binary
+*.obj text
+*.3ds binary
+*.ase binary
+*.lwo binary
+*.lws binary
+*.blend binary
+*.c4d binary
+*.dxf text
+*.jas binary
+*.mb binary
+
+# Misc
+*.pdf binary
+*.ai binary
+*.eps binary
+*.ps binary
+*.ttf binary
+*.otf binary
+*.swf binary
+*.jar binary
+*.dmg binary
+*.exe binary
+*.dll binary
+*.pdb binary
+*.apk binary
+*.app binary
+*.deb binary
+*.rpm binary
+*.msi binary
+*.msp binary
+*.msm binary
+
+# Unity files
+*.unity text
+*.mat text
+*.meta text
+*.anim text
+*.controller text
+*.prefab text
+*.mask text
+*.overrideController text
+*.cubemap text
+*.renderTexture text
+*.flare text
+*.lighting text
+*.unity merge=unityyamlmerge eol=lf
+*.prefab merge=unityyamlmerge eol=lf
+*.mat merge=unityyamlmerge eol=lf
