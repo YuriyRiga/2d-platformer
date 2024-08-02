@@ -35,12 +35,11 @@ public class EnemyAttack : MonoBehaviour
 
         while (true)
         {
-            Collider2D playerCollider = Physics2D.OverlapCircle(new Vector2(transform.position.x,transform.position.y + _offsetCircle), _attackRange, _playerLayer);
+            Collider2D playerCollider = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y + _offsetCircle), _attackRange, _playerLayer);
 
             if (playerCollider != null)
             {
-                Player player = playerCollider.GetComponent<Player>();
-                if (player != null && !player.IsDead)
+                if (playerCollider.TryGetComponent(out Player player) && player.IsDead == false)
                 {
                     player.TakeDamage(_enemy.Damage);
                 }
@@ -48,11 +47,5 @@ public class EnemyAttack : MonoBehaviour
 
             yield return delay;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(new Vector2(transform.position.x, transform.position.y + _offsetCircle), _attackRange);
     }
 }

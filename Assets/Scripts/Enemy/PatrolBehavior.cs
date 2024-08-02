@@ -3,7 +3,7 @@ using System;
 
 public class PatrolBehavior : MonoBehaviour
 {
-    private const float _epsilon = 0.1f;
+    private const float Epsilon = 0.1f;
 
     [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed;
@@ -14,14 +14,13 @@ public class PatrolBehavior : MonoBehaviour
     {
         MoveTowardsNextWaypoint();
         FlipSprite();
-
     }
 
     private void MoveTowardsNextWaypoint()
     {
         float sqrDistanceToWaypoint = (transform.position - _waypoints[_currentWaypoint].position).sqrMagnitude;
 
-        if (sqrDistanceToWaypoint < _epsilon)
+        if (sqrDistanceToWaypoint < Epsilon)
         {
             _currentWaypoint = (_currentWaypoint + 1) % _waypoints.Length;
         }

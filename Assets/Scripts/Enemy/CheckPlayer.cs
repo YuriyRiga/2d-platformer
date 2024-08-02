@@ -1,37 +1,42 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(PatrolBehavior))]
+[RequireComponent(typeof(ChaseBehavior))]
+
 public class CheckPlayer : MonoBehaviour
 {
     [SerializeField] private float _detectionRange = 5f;
     [SerializeField] private float _offsetCircle = 0f;
     [SerializeField] private LayerMask _playerLayer;
-    private Vector2 playerTransform;
+
+    private PatrolBehavior _patrolBehavior;
+    private ChaseBehavior _chaseBehavior;
+
+    private void Awake()
+    {
+        _patrolBehavior = GetComponent<PatrolBehavior>();
+        _chaseBehavior = GetComponent<ChaseBehavior>();
+    }
 
     private void Update()
     {
-        CheckForPlayer(); 
+        DetectAndSwitchBehaviors(); 
     }
 
-    private void CheckForPlayer()
+    private void DetectAndSwitchBehaviors()
     {
         Collider2D playerCollider = Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y + _offsetCircle), _detectionRange, _playerLayer);
 
         if (playerCollider != null)
         {
-            gameObject.GetComponent<PatrolBehavior>().enabled = false;
-            gameObject.GetComponent<ChaseBehavior>().enabled = true;
+            _patrolBehavior.enabled = false;
+            _chaseBehavior.enabled = true;
         }
         else
         {
-            gameObject.GetComponent<PatrolBehavior>().enabled = true;
-            gameObject.GetComponent<ChaseBehavior>().enabled = false;
+            _patrolBehavior.enabled = true;
+            _chaseBehavior.enabled = false;
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.gray;
-        Gizmos.DrawWireSphere(new Vector2(transform.position.x, transform.position.y + _offsetCircle), _detectionRange);
     }
 }
 

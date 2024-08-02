@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Враг" + _health);
-
         if (_health < 0)
         {
             _health = 0;
@@ -20,6 +18,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        _health -= damage;
+        if (damage > 0) 
+        { 
+            _health -= damage;
+        }
     }
 }

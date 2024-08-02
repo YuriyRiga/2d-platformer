@@ -11,14 +11,12 @@ public class Player : MonoBehaviour
     public float Damage => _damage;
     public bool IsDead => _isDead;
 
-    private void Update()
-    {
-        Debug.Log(_health);
-    }
-
     public void TakeDamage(float damage)
     {
-        _health -= damage;
+        if (damage > 0)
+        {
+            _health -= damage;
+        }
 
         if (_health <= 0)
         {

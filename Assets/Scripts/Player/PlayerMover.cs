@@ -15,12 +15,10 @@ public class PlayerMover : MonoBehaviour
     private float _direction;
     private bool _isJump = false;
     private bool _isGrounded = false;
-    private Vector3 _scale;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _scale = transform.localScale;
     }
 
     private void Update()
@@ -52,17 +50,16 @@ public class PlayerMover : MonoBehaviour
 
         if (_direction > 0)
         {
-            _scale.x = Mathf.Abs(_scale.x);
+            scale.x = Mathf.Abs(scale.x);
         }
         else if (_direction < 0)
         {
-            _scale.x = -Mathf.Abs(_scale.x);
+            scale.x = -Mathf.Abs(scale.x);
         }
 
-        transform.localScale = _scale;
+        transform.localScale = scale;
 
         _animator.SetFloat(PlayerAnimatorData.Params.Speed, Mathf.Abs(_direction));
-
     }
 
     private void Jump()

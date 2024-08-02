@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class Spawner <T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Spawner <T> : MonoBehaviour where T : Collectible
 {
     [SerializeField] private T _prefab;
     [SerializeField] private List<SpawnPoint> _spawnPoints;
@@ -37,9 +37,21 @@ public abstract class Spawner <T> : MonoBehaviour where T : MonoBehaviour
         return item;
     }
 
-    protected abstract void Subscribe(T item);
+    protected virtual void Subscribe(T item)
+    {
+        item.CollectibleDisable += OnCollectibleDisable;
+    }
 
-    protected abstract void Unsubscribe(T item);
+    protected virtual void Unsubscribe(T item)
+    {
+        item.CollectibleDisable -= OnCollectibleDisable;
+        Destroy(item.gameObject);
+    }
+
+    private void OnCollectibleDisable(Collectible collectible)
+    {
+        Release(collectible as T);
+    }
 
     private void InitializePool(T item)
     {
@@ -75,4 +87,3 @@ public abstract class Spawner <T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 }
-
