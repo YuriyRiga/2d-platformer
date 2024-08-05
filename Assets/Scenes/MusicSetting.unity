@@ -746,14 +746,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 1226130994}
   m_HandleRect: {fileID: 1216651638}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1994232509}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainSettings, Assembly-CSharp
         m_MethodName: SetBackgroudVolume
         m_Mode: 0
@@ -1782,6 +1782,8 @@ GameObject:
   - component: {fileID: 1562226062}
   - component: {fileID: 1562226063}
   - component: {fileID: 1562226065}
+  - component: {fileID: 1562226067}
+  - component: {fileID: 1562226066}
   - component: {fileID: 1562226064}
   m_Layer: 5
   m_Name: ButtonsVolume
@@ -1857,14 +1859,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 2032737965}
   m_HandleRect: {fileID: 859435669}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1994232509}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainSettings, Assembly-CSharp
         m_MethodName: SetButtonVolume
         m_Mode: 0
@@ -1888,12 +1890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f161e735b6a7e964c9be3353d8810186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clip1: {fileID: 8300000, guid: 3c6e3035c1525824daf74c308a627498, type: 3}
-  _clip2: {fileID: 8300000, guid: 3575b261854f2dd4a87a8eab2662a40c, type: 3}
-  _clip3: {fileID: 8300000, guid: f64d5c1c3bee30e41ad38e1d74184528, type: 3}
-  _button1: {fileID: 159062799}
-  _button2: {fileID: 290180165}
-  _button3: {fileID: 1079097262}
+  _clip: {fileID: 8300000, guid: f64d5c1c3bee30e41ad38e1d74184528, type: 3}
+  _button: {fileID: 1079097262}
 --- !u!82 &1562226065
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1990,6 +1988,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1562226066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562226061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f161e735b6a7e964c9be3353d8810186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 3575b261854f2dd4a87a8eab2662a40c, type: 3}
+  _button: {fileID: 290180165}
+--- !u!114 &1562226067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562226061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f161e735b6a7e964c9be3353d8810186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clip: {fileID: 8300000, guid: 3c6e3035c1525824daf74c308a627498, type: 3}
+  _button: {fileID: 159062799}
 --- !u!1 &1571996546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,14 +2197,14 @@ MonoBehaviour:
   m_FillRect: {fileID: 791711379}
   m_HandleRect: {fileID: 2004872214}
   m_Direction: 0
-  m_MinValue: 0.001
+  m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1994232509}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MainSettings, Assembly-CSharp
         m_MethodName: SetMasterVolume
         m_Mode: 0
@@ -2363,19 +2389,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1821347018}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1994232509}
-        m_TargetAssemblyTypeName: MainSettings, Assembly-CSharp
-        m_MethodName: ButtonMute
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1821347018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2558,8 +2572,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1994232505}
   - component: {fileID: 1994232508}
-  - component: {fileID: 1994232509}
   - component: {fileID: 1994232507}
+  - component: {fileID: 1994232512}
+  - component: {fileID: 1994232511}
+  - component: {fileID: 1994232510}
+  - component: {fileID: 1994232509}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -2641,10 +2658,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5526a62bd9c7a1b48bb2a33b4a2a0a44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mixer: {fileID: 7292445821206407809, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
+  _mixerVolume: BackgroundVolume
+  _slider: {fileID: 469527628}
+--- !u!114 &1994232510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994232504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5526a62bd9c7a1b48bb2a33b4a2a0a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 2457786426459087605, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
+  _mixerVolume: ButtonsVolume
+  _slider: {fileID: 1562226063}
+--- !u!114 &1994232511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994232504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5526a62bd9c7a1b48bb2a33b4a2a0a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24300002, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
+  _mixerVolume: MasterVolume
+  _slider: {fileID: 1571996549}
+--- !u!114 &1994232512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994232504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b770d241d612c7c43b173f1bc371e2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _audioListener: {fileID: 1690879442}
-  _masterMixer: {fileID: 24300002, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
-  _buttonsMixer: {fileID: 2457786426459087605, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
-  _backgroudMixer: {fileID: 7292445821206407809, guid: 34cb4a7e983a8cf40a5e9e09b7362e17, type: 2}
+  _buttonsMute: {fileID: 1821347017}
 --- !u!1 &2004872213
 GameObject:
   m_ObjectHideFlags: 0
