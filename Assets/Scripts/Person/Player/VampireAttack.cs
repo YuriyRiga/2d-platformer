@@ -40,11 +40,20 @@ public class VampireAttack : MonoBehaviour
             _currentTimer = Mathf.Min(_currentTimer, _timerAttack);
         }
 
-        _fillBarCoroutine = StartCoroutine(FillBar());
+        if (_fillBarCoroutine == null)
+        {
+            _fillBarCoroutine = StartCoroutine(FillBar());
+        }
     }
 
     public void StartAttack(Health health)
     {
+        if (health.IsDead)
+        {
+            StopAttack();
+            return;
+        }
+
         _enemyHealth = health;
 
         if (_isWork == false && _currentTimer == _timerAttack)
@@ -53,10 +62,6 @@ public class VampireAttack : MonoBehaviour
             _attackCoroutine =  StartCoroutine(Attack());
         }
 
-        if (health.IsDead)
-        {
-            StopAttack();
-        }
     }
 
     public void StopAttack()
@@ -65,6 +70,11 @@ public class VampireAttack : MonoBehaviour
 
         if (_isWork)
         {
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+            }
+
             _attackCoroutine = null;
             _isWork = false;
         }
