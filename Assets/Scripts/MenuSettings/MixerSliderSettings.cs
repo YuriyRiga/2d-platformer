@@ -20,8 +20,9 @@ public class MixerSliderSettings : MonoBehaviour
     public void SetMixerVolume(float volume)
     {
         float minValue = -80;
+        float multiplier = 20;
 
-        _mixer.audioMixer.SetFloat(_mixerVolume, Mathf.Log10(volume) * 20);
+        _mixer.audioMixer.SetFloat(_mixerVolume, Mathf.Log10(volume) * multiplier);
 
         if (volume == 0)
         {

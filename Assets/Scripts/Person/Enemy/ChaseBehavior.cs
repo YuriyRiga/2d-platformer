@@ -8,8 +8,14 @@ public class ChaseBehavior : MonoBehaviour
     [SerializeField] private LayerMask _playerLayer;
 
     private Transform _playerTransform;
+    private Enemy _enemy;
+
     private bool _isChasingPlayer = false;
 
+    private void Awake()
+    {
+        _enemy = GetComponent<Enemy>();
+    }
     private void Update()
     {
         CheckForPlayer();
@@ -53,13 +59,13 @@ public class ChaseBehavior : MonoBehaviour
 
     private void FlipSprite()
     {
-        Vector3 scale = transform.localScale;
+        Vector3 scale = _enemy.SpritePerson.transform.localScale;
 
         if (_playerTransform != null)
         {
             scale.x = _playerTransform.position.x > transform.position.x ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
         }
 
-        transform.localScale = scale;
+        _enemy.SpritePerson.transform.localScale = scale;
     }
 }

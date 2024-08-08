@@ -15,18 +15,18 @@ public class ButtonSettings : MonoBehaviour
 
     private void OnEnable()
     {
-        _button.onClick.AddListener(() => PlayAudio(_clip));
+        _button.onClick.AddListener(PlayAudio);
     }
 
     private void OnDisable()
     {
-        _button.onClick.RemoveListener(() => PlayAudio(_clip));
+        _button.onClick.RemoveListener(PlayAudio);
 
     }
 
-    private void PlayAudio(AudioClip clip)
+    private void PlayAudio()
     {
-        _audioSource.clip = clip;
+        _audioSource.clip = _clip;
         _audioSource.Play();
     }
 }

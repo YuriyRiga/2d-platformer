@@ -9,7 +9,12 @@ public class PatrolBehavior : MonoBehaviour
     [SerializeField] private float _speed;
 
     private int _currentWaypoint;
+    private Enemy _enemy;
 
+    private void Awake()
+    {
+        _enemy = GetComponent<Enemy>();
+    }
     private void Update()
     {
         MoveTowardsNextWaypoint();
@@ -30,10 +35,10 @@ public class PatrolBehavior : MonoBehaviour
 
     private void FlipSprite()
     {
-        Vector3 scale = transform.localScale;
+        Vector3 scale = _enemy.SpritePerson.transform.localScale;
 
         scale.x = _waypoints[_currentWaypoint].position.x > transform.position.x ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
-        
-        transform.localScale = scale;
+
+        _enemy.SpritePerson.transform.localScale = scale;
     }
 }

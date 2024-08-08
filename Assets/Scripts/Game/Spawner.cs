@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class Spawner <T> : MonoBehaviour where T : Collectible
+public abstract class Spawner<T> : MonoBehaviour where T : Collectible
 {
     [SerializeField] private T _prefab;
     [SerializeField] private List<SpawnPoint> _spawnPoints;
@@ -50,7 +50,10 @@ public abstract class Spawner <T> : MonoBehaviour where T : Collectible
 
     private void OnCollectibleDisable(Collectible collectible)
     {
-        Release(collectible as T);
+        if (collectible != null)
+        {
+            Release(collectible as T);
+        }
     }
 
     private void InitializePool(T item)

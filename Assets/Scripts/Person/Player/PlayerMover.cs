@@ -12,6 +12,7 @@ public class PlayerMover : MonoBehaviour
 
     private readonly int Speed = Animator.StringToHash(nameof(Speed));
     private Rigidbody2D _rigidbody;
+    private Transform _spritePlayer;
     private float _direction;
     private bool _isJump = false;
     private bool _isGrounded = false;
@@ -19,6 +20,7 @@ public class PlayerMover : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _spritePlayer = transform.GetChild(0);
     }
 
     private void Update()
@@ -44,7 +46,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Move()
     {
-        Vector3 scale = transform.localScale;
+        Vector3 scale = _spritePlayer.transform.localScale;
 
         _rigidbody.velocity = new Vector2(_direction * _speedDirection, _rigidbody.velocity.y);
 
@@ -57,7 +59,7 @@ public class PlayerMover : MonoBehaviour
             scale.x = -Mathf.Abs(scale.x);
         }
 
-        transform.localScale = scale;
+        _spritePlayer.transform.localScale = scale;
 
         _animator.SetFloat(PlayerAnimatorData.Params.Speed, Mathf.Abs(_direction));
     }

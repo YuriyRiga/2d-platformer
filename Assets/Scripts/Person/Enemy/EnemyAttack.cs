@@ -9,11 +9,13 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private LayerMask _playerLayer;
 
     private Enemy _enemy;
+    private Attack _attack;
     private Coroutine _attackCoroutine;
 
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
+        _attack = GetComponent<Attack>();   
     }
 
     private void OnEnable()
@@ -39,9 +41,9 @@ public class EnemyAttack : MonoBehaviour
 
             if (playerCollider != null)
             {
-                if (playerCollider.TryGetComponent(out Player player) && player.IsDead == false)
+                if (playerCollider.TryGetComponent(out Health health) && health.IsDead == false)
                 {
-                    player.TakeDamage(_enemy.Damage);
+                    health.TakeDamage(_attack.Damage);
                 }
             }
 
