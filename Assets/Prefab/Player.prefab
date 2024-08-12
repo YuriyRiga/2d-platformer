@@ -27,8 +27,8 @@ RectTransform:
   m_GameObject: {fileID: 268650286656122093}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0448124, y: 2.0448124, z: 2.0448124}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4165645754035741393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59,17 +59,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.46666667}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: aec1a9852ce752844830dbd5bd4a19b4, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 6201383675275821794}
   - component: {fileID: 1162639689677502591}
   - component: {fileID: 8968180522581747864}
+  - component: {fileID: 1806194804957847801}
   - component: {fileID: -3617152109081733184}
   - component: {fileID: 1412105740316076629}
   m_Layer: 6
@@ -468,6 +469,20 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &1806194804957847801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3074564777135531354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35241c54fbd73b94397a49f7c4c28ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _image: {fileID: 179652225988000189}
+  _attack: {fileID: -3617152109081733184}
 --- !u!114 &-3617152109081733184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,11 +495,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 334a0b05a5053ac4aa98086866ebf8b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackRange: 3.5
+  _attackRange: 4
   _attackCooldown: 1
   _damage: 5
   _timerAttack: 6
-  _image: {fileID: 179652225988000189}
 --- !u!70 &1412105740316076629
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -669,7 +683,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5603259574017410474}
   - component: {fileID: 6725653589370308191}
-  - component: {fileID: 8039378072340145038}
   - component: {fileID: 5174003744333376294}
   m_Layer: 0
   m_Name: Weapons_1
@@ -745,22 +758,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8039378072340145038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5941472758322921444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce902200db1450e449d409e48a5efe4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 236319914601901859}
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!61 &5174003744333376294
 BoxCollider2D:
   m_ObjectHideFlags: 0

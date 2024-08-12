@@ -2,12 +2,12 @@
 
 public class Player : MonoBehaviour
 {
-    private Animator _animator;
+    [SerializeField]private Animator _animator;
+
     private Health _health;
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
         _health = GetComponent<Health>();
     }
 

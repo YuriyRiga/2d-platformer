@@ -5,7 +5,6 @@ using System.Collections;
 public class HealthBarSlider : MonoBehaviour
 {
     [SerializeField] private Slider _healthSlider;
-
     [SerializeField] private Health _player;
 
     private float _targetSliderValue = 1;
